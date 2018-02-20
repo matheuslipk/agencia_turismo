@@ -1,0 +1,10 @@
+.grid__descricao
+{
+    text-align: left;
+    padding: 0.1em 0.5em;
+    color: #698b8d;
+}
+.grid__item-title
+{
+    color: #03a9f4;
+}
