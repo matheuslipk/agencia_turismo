@@ -25,12 +25,40 @@
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
 		<link rel="stylesheet" type="text/css" href="css/loja.css"/>
+                <link rel="stylesheet" type="text/css" href="css/checkout-rounded.css" />
 		<!--[if IE]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<script>
 			document.documentElement.className = 'js';
 		</script>
+                
+                <style>
+                    .modal {
+                        display: none; /* Hidden by default */
+                        position: fixed; /* Stay in place */
+                        z-index: 1; /* Sit on top */
+                        left: 0;
+                        top: 0;
+                        width: 100%; /* Full width */
+                        height: 100%; /* Full height */
+                        overflow: auto; /* Enable scroll if needed */
+                        background-color: rgb(0,0,0); /* Fallback color */
+                        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                    }
+                    /* Modal Content */
+                    .modal-content {
+                        position: relative;
+                        background-color: #fefefe;
+                        margin: auto;
+                        padding: 0;
+                        border: 1px solid #888;
+                        width: 80%;
+                        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+                        animation-name: animatetop;
+                        animation-duration: 0.4s
+                    }
+                </style>
 	</head>
 	<body>
 		<div class="view">
@@ -92,7 +120,35 @@
 					</svg>
 					<span class="button__text">Veja mais!</span>
 				</button>
+                            <div class="dummy-fixed">
+				
+				<div class="checkout">
+                                    <a class="checkout__button"  href="#" ><!-- Fallback location -->
+						<span class="checkout__text">
+							<span class="checkout__text-inner checkout__initial-text">Checkout</span>
+							<span class="checkout__text-inner checkout__final-text">$40.70 <i class="fa fa-fw fa-shopping-cart"></i></span>
+						</span>
+					</a>
+					<div class="checkout__order">
+						<div class="checkout__order-inner">
+							<table class="checkout__summary">
+								<thead>
+							        <tr><th>Item</th><th>QTY</th><th>Price</th><th>&nbsp;</th></tr>
+							    </thead>
+							    <tbody>
+									<tr><td>Imitations <span>Mark Lanegan</span></td><td>1</td><td>$12.90</td><td><button class="checkout__action"><i class="icon fa fa-trash"></i></button></td></tr>
+									<tr><td>Out Of Exile <span>Audioslave</span></td><td>1</td><td>$15.90</td><td><button class="checkout__action"><i class="icon fa fa-trash"></i></button></td></tr>
+									<tr><td>Cure For Pain <span>Morphine</span></td><td>1</td><td>$11.90</td><td><button class="checkout__action"><i class="icon fa fa-trash"></i></button></td></tr>
+								</tbody>
+							</table><!-- /checkout__summary -->
+							<button class="checkout__close checkout__cancel"><i class="icon fa fa-fw fa-close"></i>Close</button>
+						</div><!-- /checkout__order-inner -->
+					</div><!-- /checkout__order -->
+				</div><!-- /checkout -->
+				<div class="checkout__count">3</div>
+			</div>
 			</section>
+                    
 			<div class="device">
 				<div class="device__screen"></div>
 			</div>
@@ -131,5 +187,25 @@
 		<script src="js/dynamics.min.js"></script>
 		<script src="js/imagesloaded.pkgd.min.js"></script>
 		<script src="js/main_2.js"></script>
+                <script>
+			(function() {
+				var dummy = document.getElementById('dummy-grid');
+				[].slice.call( document.querySelectorAll( '.checkout' ) ).forEach( function( el ) {
+					var openCtrl = el.querySelector( '.checkout__button' ),
+						closeCtrl = el.querySelector( '.checkout__cancel' );
+
+					openCtrl.addEventListener( 'click', function(ev) {
+						ev.preventDefault();
+						classie.add( el, 'checkout--active' );
+						classie.add( dummy, 'dummy-grid--highlight' );
+					} );
+
+					closeCtrl.addEventListener( 'click', function() {
+						classie.remove( el, 'checkout--active' );
+						classie.remove( dummy, 'dummy-grid--highlight' );
+					} );
+				} );
+			})();
+		</script>
 	</body>
 </html>
