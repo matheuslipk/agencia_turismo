@@ -81,7 +81,3 @@ class ClienteDao {
     }
     
 }
-$c = new ClienteDao();
-$cliente['nome'] = 'no';
-
-print_r($c->pesquisarClientes($cliente));

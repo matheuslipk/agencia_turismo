@@ -3,7 +3,7 @@
 class ConexaoDao{
     public static function getConexao(){
         $host='localhost';
-        $username ='usuario_agencia';
+        $username ='agencia_turismo';
         $passwd='123456';
         $dbname='agencia_turismo';
         
