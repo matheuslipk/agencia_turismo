@@ -20,7 +20,7 @@
 
         <!-- Custom CSS -->
         <link href="../css/stylish-portfolio.min.css" rel="stylesheet">
-        
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -36,60 +36,79 @@
                     <h3 class="text-secondary mb-0">Destinos visitados</h3>
                     <h2 class="mb-5">Veja as atividades que já fizemos!</h2>
                 </div>
-                <div class="row no-gutters">
-                    <div class="col-lg-6">
-                        
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Launch demo modal
+                </button>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#home">Descrição</a></li>
+                                    <li><a data-toggle="tab" href="#menu1">Incluso...</a></li>
+                                    <li><a data-toggle="tab" href="#menu2">Galeria</a></li>
+                                </ul>
 
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
-                                </div>
+                                <div class="tab-content">
+                                    <div id="home" class="tab-pane fade in active">
+                                        <h3>HOME</h3>
+                                        <p>Some content.</p>
+                                    </div>
+                                    <div id="menu1" class="tab-pane fade">
+                                        <h3>Menu 1</h3>
+                                        <p>Some content in menu 1.</p>
+                                    </div>
+                                    <div id="menu2" class="tab-pane fade">
+                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                            <!-- Indicators -->
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                                            </ol>
 
-                                <div class="item">
-                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
-                                </div>
+                                            <!-- Wrapper for slides -->
+                                            <div class="carousel-inner">
+                                                <div class="item active">
+                                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
+                                                </div>
 
-                                <div class="item">
-                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
+                                                <div class="item">
+                                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
+                                                </div>
+
+                                                <div class="item">
+                                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Left and right controls -->
+                                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Left and right controls -->
-                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div id="titulo" class="col-lg-12">
-                                <h3> Viagem para Canoa Quebrada</h3>
-                            </div>
-                            <div id="descricao" class="col-lg-12">
-                                area2
-                            </div>
-                            <div id="preço" class="col-lg-12">
-                                area3
-                            </div>
-                        </div>
-                        <!-- botão de comprar aqui -->
-                    </div>
-
-
                 </div>
+                
             </div>
         </section>
 
