@@ -1,4 +1,10 @@
-<?php ?>
+<?php
+require_once './dao/ProdutoDao.php';
+$produtoDao = new ProdutoDao();
+$produtos = $produtoDao->getAllProduto();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
@@ -28,6 +34,8 @@
         <script>
             document.documentElement.className = 'js';
         </script>
+
+
     </head>
     <body>
         <div class="view">
@@ -50,6 +58,25 @@
                     <p class="page__title-sub">Para aproveitar melhor o seu evento com tranquilidade ou mesmo aproveitar aquela viagem!</p>
                 </div>
                 <ul class="grid">
+
+                    <?php foreach ($produtos as $produto) { ?>
+                        <li class="grid__item">
+                            <a class="grid__link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                <img class="grid__img" src="img/photos/1.jpg" alt="Some image" />
+                                <h3 class="grid__item-title"><?= $produto["nome"] ?></h3>
+                            </a>
+                            <a class="grid__link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                <h3 class="grid__item-title" style="color: black">R$ <?= $produto["preco"] ?></h3>
+                            </a>
+                            <form method="post" action="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                <input type="hidden" name="id" value="<?= $produto["id"] ?>"><!-- data-toggle="modal" data-target="#exampleModalCenter" isso é o que chama a dialog-->
+                                <button type="button" class="btn btn-primary" style="width: 100%" >
+                                    Conferir Oferta
+                                </button>
+                            </form>
+                        </li>
+                    <?php } ?>
+
                     <li class="grid__item">
                         <a class="grid__link" href="#">
                             <img class="grid__img" src="img/photos/1.jpg" alt="Some image" />
@@ -162,14 +189,18 @@
                     <li class="grid__item">
                         <a class="grid__link" href="#">
                             <img class="grid__img" src="img/photos/1.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Natural saturation effects</h3>
+                            <h3 class="grid__item-title">AAAAAA</h3>
                         </a>
                         <a class="grid__link" href="#">
                             <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
                         </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
+                        <form data-toggle="modal" data-target="#exampleModalCenter">
+                            <input type="hidden" name="">
+                            <button type="button" class="btn btn-primary" style="width: 100%" >
+                                Conferir Oferta
+                            </button>
+                        </form>
+                        
                     </li>
                     <li class="grid__item">
                         <a class="grid__link" href="#">

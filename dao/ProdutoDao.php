@@ -66,5 +66,21 @@ class ProdutoDao {
             return $erro;
         }
     }
+    
+    public function getAllProduto(){
+        $con = ConexaoDao::getConexao();
+        $query = "SELECT * FROM produto";
+        $stmt = $con->prepare($query);
+        if($stmt->execute()===TRUE){
+            $result = $stmt->get_result();
+            $arrayProduto = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            $con->close();
+            return $arrayProduto;
+        }else{
+            $erro = $stmt->errno.' - '.$stmt->error;
+            return $erro;
+        }
+    }
 
 }
