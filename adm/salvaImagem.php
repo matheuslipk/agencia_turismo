@@ -1,7 +1,11 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/dao/ArquivoProdutoDao.php';
+require "../dao/ArquivoDao.php";
+$root = $_SERVER['DOCUMENT_ROOT'];
+$arquivoDao = new ArquivoDao();
 
-$id_evento = $_POST['id_evento'];
+
+$nomeEnviado = $_POST['nome'];
+$descricao = $_POST['descricao'];
 
 // verifica se foi enviado um arquivo
 if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] == 0 ) {
@@ -26,15 +30,25 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
         
         
         // Aqui tu vai salvar no banco e retornar o ID pra salvar na pasta local
-        $novoNome = 2 . '.' . $extensao;
+        $novoNome = $nomeEnviado. '.jpg' ;
  
-        // Concatena a pasta com o nome
-        $destino = '../img/eventos/ ' . $novoNome;
- 
+        // Concatena a pasta com o nomea
+        $destino = $root.'/img/eventos/ ' . $novoNome;
+        
+        $arquivo['idArquivo'] = $nomeEnviado;
+        $arquivo['link'] = '/img/eventos/ ' . $novoNome;
+        $arquivo['descricao'] = $descricao;
+        
+        if($arquivoDao->inserirArquivo($arquivo)){
+            
+        }else{
+            echo "erro ao salvar no banco";
+            header("Location: uploadImage.php");
+        }
+        
         // tenta mover o arquivo para o destino
         if ( @move_uploaded_file ( $arquivo_tmp, $destino ) ) {
             echo 'Arquivo salvo com sucesso em : <strong>' . $destino . '</strong><br />';
-            echo '<img src = "' . $destino . '" />';
         }
         else
             echo 'Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita.<br />';
@@ -43,4 +57,5 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
         echo 'Você poderá enviar apenas arquivos "*.jpg;*.jpeg;*.gif;*.png"<br />';
 }
 else
-    echo 'Você não enviou nenhum arquivo!';
+    header("Location: uploadImage.php");
+

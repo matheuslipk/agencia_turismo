@@ -2,16 +2,15 @@
 require_once './dao/ProdutoDao.php';
 $produtoDao = new ProdutoDao();
 $produtos = $produtoDao->getAllProduto();
-
-
+header("Content-type: text/html; charset=utf-8");
 ?>
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html  class="no-js">
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Polaroid Stack to Grid Intro Animation | Demo: Spring | Codrops</title>
+        <title>Loja - EmpreenderTur</title>
         <meta name="description" content="Demo of the tutorial on how to re-create a similar effect of the takeitapp.co website." />
         <meta name="keywords" content="responsive, grid, polaroid, animation, intro, web design, tutorial, responsive images, srcset" />
         <meta name="author" content="Codrops" />
@@ -68,233 +67,16 @@ $produtos = $produtoDao->getAllProduto();
                             <a class="grid__link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
                                 <h3 class="grid__item-title" style="color: black">R$ <?= $produto["preco"] ?></h3>
                             </a>
-                            <form method="post" action="#" data-toggle="modal" data-target="#exampleModalCenter">
-                                <input type="hidden" name="id" value="<?= $produto["id"] ?>"><!-- data-toggle="modal" data-target="#exampleModalCenter" isso é o que chama a dialog-->
-                                <button type="button" class="btn btn-primary" style="width: 100%" >
-                                    Conferir Oferta
-                                </button>
-                            </form>
+                            
+                            <button id="<?= $produto["idProduto"] ?>" type="button" class="btn btn-primary" onclick="dialog(this.id)" style="width: 100%" >
+                                Conferir Oferta
+                            </button>
                         </li>
                     <?php } ?>
 
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/1.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Natural saturation effects</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/2.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Auto-color and light</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/3.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">That special blur</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/4.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Drama where you need it</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/5.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Realistic depth</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/6.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">The common, but special</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/7.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Natural saturation effects</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/8.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">That special blur</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/9.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Auto-color and light</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/1.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">AAAAAA</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <form data-toggle="modal" data-target="#exampleModalCenter">
-                            <input type="hidden" name="">
-                            <button type="button" class="btn btn-primary" style="width: 100%" >
-                                Conferir Oferta
-                            </button>
-                        </form>
-                        
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/2.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">Auto-color and light</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
-                    <li class="grid__item">
-                        <a class="grid__link" href="#">
-                            <img class="grid__img" src="img/photos/3.jpg" alt="Some image" />
-                            <h3 class="grid__item-title">That special blur</h3>
-                        </a>
-                        <a class="grid__link" href="#">
-                            <h3 class="grid__item-title" style="color: black">R$ 23,00</h3>
-                        </a>
-                        <button type="button" class="btn btn-primary" style="width: 100%" data-toggle="modal" data-target="#exampleModalCenter">
-                            Conferir Oferta
-                        </button>
-                    </li>
                 </ul>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#home">Descrição</a></li>
-                                    <li><a data-toggle="tab" href="#menu1">Incluso...</a></li>
-                                    <li><a data-toggle="tab" href="#menu2">Galeria</a></li>
-                                </ul>
+                <div class='modal fade' id='exampleModalCenter' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>
 
-                                <div class="tab-content">
-                                    <div id="home" class="tab-pane fade in active">
-                                        <h3>HOME</h3>
-                                        <p>Some content.</p>
-                                    </div>
-                                    <div id="menu1" class="tab-pane fade">
-                                        <h3>Menu 1</h3>
-                                        <p>Some content in menu 1.</p>
-                                    </div>
-                                    <div id="menu2" class="tab-pane fade">
-                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                            <!-- Indicators -->
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                                            </ol>
-
-                                            <!-- Wrapper for slides -->
-                                            <div class="carousel-inner">
-                                                <div class="item active">
-                                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
-                                                </div>
-
-                                                <div class="item">
-                                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
-                                                </div>
-
-                                                <div class="item">
-                                                    <img class="img-fluid" src="../img/portfolio-1.jpg" alt="">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- Left and right controls -->
-                                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <button class="button button--load" aria-label="Load more images">
                     <svg class="polaroid" width="100%" height="100%" viewBox="0 0 220 243" preserveAspectRatio="xMidYMid meet">
@@ -341,6 +123,15 @@ $produtos = $produtoDao->getAllProduto();
                 </div>
             </footer>
         </div><!-- /view -->
+        <script>
+            function dialog(id) {
+                $.get("php/detalhaHtml/getDialog.php", {id : id}).done(function (val) {
+                    $("#exampleModalCenter").html(val);
+                });
+
+                $('#exampleModalCenter').modal('show')
+            }
+        </script>
         <script src="js/classie.js"></script>
         <script src="js/dynamics.min.js"></script>
         <script src="js/imagesloaded.pkgd.min.js"></script>

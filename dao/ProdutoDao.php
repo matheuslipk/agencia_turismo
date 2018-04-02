@@ -5,10 +5,10 @@ class ProdutoDao {
     public function atualizarProduto($produto){
         $con = ConexaoDao::getConexao();
         $query = "UPDATE produto SET idTipoProduto=?, nome=?, quantDisponivel=?, "
-                . "preco=?, descricao=? WHERE idProduto=?";
+                . "preco=?, descricao=?, incluso=? WHERE idProduto=?";
         $stmt = $con->prepare($query);
-        $stmt->bind_param("isidsi", $produto['idTipoProduto'], $produto['nome'], 
-                $produto['quantDisponivel'], $produto['preco'], $produto['descricao'], $produto['idProduto']);
+        $stmt->bind_param("isidssi", $produto['idTipoProduto'], $produto['nome'], 
+                $produto['quantDisponivel'], $produto['preco'], $produto['descricao'],$produto['incluso'], $produto['idProduto']);
         if($stmt->execute()===TRUE){
             $stmt->close();
             $con->close();
@@ -21,10 +21,10 @@ class ProdutoDao {
     
     public function inserirProduto($produto){
         $con = ConexaoDao::getConexao();
-        $query = "INSERT INTO produto VALUES (NULL,?,?,?,?,?)";
+        $query = "INSERT INTO produto VALUES (NULL,?,?,?,?,?,?)";
         $stmt = $con->prepare($query);
         $stmt->bind_param("isids", $produto['idTipoProduto'], $produto['nome'], 
-                $produto['quantDisponivel'], $produto['preco'], $produto['descricao']);
+                $produto['quantDisponivel'], $produto['preco'], $produto['descricao'],$produto['incluso']);
         if($stmt->execute()===TRUE){
             $stmt->close();
             $con->close();

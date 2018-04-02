@@ -4,9 +4,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/dao/ConexaoDao.php';
 class ArquivoDao {
     public function atualizarArquivo($arquivo){
         $con = ConexaoDao::getConexao();
-        $query = "UPDATE arquivo SET idTipoArquivo=?, link=?, descricao=? WHERE idArquivo=?";
+        $query = "UPDATE arquivo SET link=?, descricao=? WHERE idArquivo=?";
         $stmt = $con->prepare($query);
-        $stmt->bind_param("issi", $arquivo['idTipoArquivo'], $arquivo['link'], $arquivo['descricao'], $arquivo['idArquivo']);
+        $stmt->bind_param("sss", $arquivo['link'], $arquivo['descricao'], $arquivo['idArquivo']);
         if($stmt->execute()===TRUE){
             $stmt->close();
             $con->close();
@@ -19,9 +19,9 @@ class ArquivoDao {
     
     public function inserirArquivo($arquivo){
         $con = ConexaoDao::getConexao();
-        $query = "INSERT INTO arquivo VALUES (NULL,?,?,?)";
+        $query = "INSERT INTO arquivo VALUES (?,?,?)";
         $stmt = $con->prepare($query);
-        $stmt->bind_param("iss", $arquivo['idTipoArquivo'], $arquivo['link'], $arquivo['descricao']);
+        $stmt->bind_param("sss",$arquivo['idArquivo'] , $arquivo['link'], $arquivo['descricao']);
         if($stmt->execute()===TRUE){
             $stmt->close();
             $con->close();
