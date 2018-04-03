@@ -85,5 +85,22 @@ class ProdutoDao {
          return $erro;
       }
    }
+   
+   public function getAllImagesById($idProduto){ 
+      $con = ConexaoDao::getConexao();
+      $query = "SELECT a.idArquivo FROM arquivo_produto a WHERE a.idProduto =?";
+      $stmt = $con->prepare($query);
+      $stmt->bind_param("i",$idProduto);
+      if($stmt->execute()===TRUE){
+         $result = $stmt->get_result();
+         $arrayProduto = $result->fetch_all(MYSQLI_ASSOC);
+         $stmt->close();
+         $con->close();
+         return $arrayProduto;
+      }else{
+         $erro = $stmt->errno.' - '.$stmt->error;
+         return $erro;
+      }
+   }
 
 }
