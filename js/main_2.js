@@ -1,13 +1,3 @@
-/**
- * main.js
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2016, Codrops
- * http://www.codrops.com
- */
 ;(function(window) {
 
 	'use strict';
@@ -331,24 +321,16 @@
 		classie.add(loadMoreCtrl, 'button--loading');
 		// the timeout serves to simulate the time that we would probably wait for the response
 		setTimeout(function() {
-			// hide button
-			classie.add(loadMoreCtrl, 'button--hidden');
-			// add some extra items to the grid
-			var dummyContent = '<li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/1.jpg" alt="Some image" /><h3 class="grid__item-title">Natural saturation effects</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/2.jpg" alt="Some image" /><h3 class="grid__item-title">Auto-color and light</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/3.jpg" alt="Some image" /><h3 class="grid__item-title">That special blur</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/4.jpg" alt="Some image" /><h3 class="grid__item-title">Drama where you need it</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/5.jpg" alt="Some image" /><h3 class="grid__item-title">Realistic depth</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/6.jpg" alt="Some image" /><h3 class="grid__item-title">The common, but special</h3></a></li>';
-			gridEl.innerHTML += dummyContent;
-			[].slice.call(gridEl.querySelectorAll('.grid__item--hidden')).forEach(function(item) {
-				gridItems.push(item);
-				dynamics.css(item, { scale: 0, opacity: 0 });
-				classie.remove(item, 'grid__item--hidden');
-				dynamics.animate(item, { scale: 1, opacity: 1 }, {
-					type: dynamics.spring,
-					duration: 2000,
-					frequency: 400,
-					friction: 400,
-					delay: randomIntFromInterval(0,300)
-				});
-			});
-		}, 1500);
+			classie.remove(loadMoreCtrl, 'button--loading');
+                        $.get("/php/maisProdutos.php", {
+                           
+                        }).done(function (resposta){
+                           $(".grid").append(resposta);
+                        });
+			
+		}, 500);
+                
+                
 	}
 
 	// force the scrolling to the top of the page (from http://stackoverflow.com/a/23312671)
