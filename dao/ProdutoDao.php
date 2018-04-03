@@ -67,20 +67,23 @@ class ProdutoDao {
         }
     }
     
-    public function getAllProduto(){
-        $con = ConexaoDao::getConexao();
-        $query = "SELECT * FROM produto";
-        $stmt = $con->prepare($query);
-        if($stmt->execute()===TRUE){
-            $result = $stmt->get_result();
-            $arrayProduto = $result->fetch_all(MYSQLI_ASSOC);
-            $stmt->close();
-            $con->close();
-            return $arrayProduto;
-        }else{
-            $erro = $stmt->errno.' - '.$stmt->error;
-            return $erro;
-        }
-    }
+   public function getAllProduto($quantProdutos){
+      $quantPorVez = 4;       
+      $temp = $quantProdutos-$quantPorVez;
+      $con = ConexaoDao::getConexao();
+      $query = "SELECT * FROM produto LIMIT ?,?";
+      $stmt = $con->prepare($query);
+      $stmt->bind_param("ii", $temp, $quantProdutos);
+      if($stmt->execute()===TRUE){
+         $result = $stmt->get_result();
+         $arrayProduto = $result->fetch_all(MYSQLI_ASSOC);
+         $stmt->close();
+         $con->close();
+         return $arrayProduto;
+      }else{
+         $erro = $stmt->errno.' - '.$stmt->error;
+         return $erro;
+      }
+   }
 
 }

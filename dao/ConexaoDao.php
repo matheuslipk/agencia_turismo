@@ -8,7 +8,7 @@ class ConexaoDao{
         $dbname='agencia_turismo';
         
         $con = new mysqli($host, $username, $passwd, $dbname);
-        $con->set_charset("utf-8");
+        $con->set_charset("utf8");
         return $con;
     }
 }

@@ -1,8 +1,11 @@
 <?php
 require_once './dao/ProdutoDao.php';
+session_start();
+$_SESSION['quant_produtos'] = 4;
+
 $produtoDao = new ProdutoDao();
-$produtos = $produtoDao->getAllProduto();
-header("Content-type: text/html; charset=utf-8");
+$produtos = $produtoDao->getAllProduto($_SESSION['quant_produtos']);
+
 ?>
 <!DOCTYPE html>
 <html  class="no-js">
@@ -11,18 +14,12 @@ header("Content-type: text/html; charset=utf-8");
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Loja - EmpreenderTur</title>
-        <meta name="description" content="Demo of the tutorial on how to re-create a similar effect of the takeitapp.co website." />
-        <meta name="keywords" content="responsive, grid, polaroid, animation, intro, web design, tutorial, responsive images, srcset" />
-        <meta name="author" content="Codrops" />
         <link rel="shortcut icon" href="favicon.ico">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="css/square-loader.min.css" />
         <link rel="stylesheet" type="text/css" href="css/demo.css" />
         <link rel="stylesheet" type="text/css" href="css/component.css" />
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/stylish-portfolio.min.css" rel="stylesheet">
         <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
@@ -65,7 +62,7 @@ header("Content-type: text/html; charset=utf-8");
                                 <h3 class="grid__item-title"><?= $produto["nome"] ?></h3>
                             </a>
                             <a class="grid__link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
-                                <h3 class="grid__item-title" style="color: black">R$ <?= $produto["preco"] ?></h3>
+                               <h3 class="grid__item-title" style="color: black">R$ <?= number_format($produto['preco'], 2) ?></h3>
                             </a>
                             
                             <button id="<?= $produto["idProduto"] ?>" type="button" class="btn btn-primary" onclick="dialog(this.id)" style="width: 100%" >
@@ -78,7 +75,8 @@ header("Content-type: text/html; charset=utf-8");
                 <div class='modal fade' id='exampleModalCenter' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>
 
                 </div>
-                <button class="button button--load" aria-label="Load more images">
+                              
+               <button class="button button--load" aria-label="Load more images">
                     <svg class="polaroid" width="100%" height="100%" viewBox="0 0 220 243" preserveAspectRatio="xMidYMid meet">
                     <rect class="polaroid__base" x="0" y="0" width="220" height="243" rx="5"></rect>
                     <rect class="polaroid__inner" x="16" y="20" width="189" height="149"></rect>
@@ -88,8 +86,9 @@ header("Content-type: text/html; charset=utf-8");
                     <circle cx="159.5" cy="94.5" r="17.5"></circle>
                     </g>
                     </svg>
-                    <span class="button__text">Carregar</span>
+                    <span class="button__text">Carregaaar</span>
                 </button>
+               
             </section>
             <div class="device">
                 <div class="device__screen"></div>
@@ -129,7 +128,7 @@ header("Content-type: text/html; charset=utf-8");
                     $("#exampleModalCenter").html(val);
                 });
 
-                $('#exampleModalCenter').modal('show')
+                $('#exampleModalCenter').modal('show');
             }
         </script>
         <script src="js/classie.js"></script>
