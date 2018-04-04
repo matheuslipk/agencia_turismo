@@ -6,7 +6,7 @@ class ArquivoProdutoDao {
         $con = ConexaoDao::getConexao();
         $query = "INSERT INTO arquivo_produto VALUES (?,?)";
         $stmt = $con->prepare($query);
-        $stmt->bind_param("ii", $arquivoProduto['idProduto'], $arquivoProduto['idArquivo']);
+        $stmt->bind_param("is", $arquivoProduto['idProduto'], $arquivoProduto['idArquivo']);
         if($stmt->execute()===TRUE){
             $stmt->close();
             $con->close();
@@ -21,7 +21,7 @@ class ArquivoProdutoDao {
         $con = ConexaoDao::getConexao();
         $query = "DELETE FROM arquivo_produto WHERE idProduto=? AND idArquivo=?";
         $stmt = $con->prepare($query);
-        $stmt->bind_param("ii", $arquivoProduto);
+        $stmt->bind_param("is", $arquivoProduto);
         if($stmt->execute()===TRUE){
             $stmt->close();
             $con->close();

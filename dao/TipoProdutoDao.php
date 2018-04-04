@@ -38,7 +38,7 @@ class TipoProdutoDao {
         $stmt = $con->prepare($query);
         if($stmt->execute()===TRUE){
             $result = $stmt->get_result();
-            $arrayTipoProduto = $result->fetch_assoc();
+            $arrayTipoProduto = $result->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
             $con->close();
             return $arrayTipoProduto;

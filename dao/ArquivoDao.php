@@ -63,5 +63,21 @@ class ArquivoDao {
             return $erro;
         }
     }
+    
+    public function getAll(){
+        $con = ConexaoDao::getConexao();
+        $query = "SELECT * FROM arquivo";
+        $stmt = $con->prepare($query);
+        if($stmt->execute()===TRUE){
+            $result = $stmt->get_result();
+            $arrayArquivos = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            $con->close();
+            return $arrayArquivos;
+        }else{
+            $erro = $stmt->errno.' - '.$stmt->error;
+            return $erro;
+        }
+    }
         
 }

@@ -23,7 +23,7 @@ class ProdutoDao {
         $con = ConexaoDao::getConexao();
         $query = "INSERT INTO produto VALUES (NULL,?,?,?,?,?,?)";
         $stmt = $con->prepare($query);
-        $stmt->bind_param("isids", $produto['idTipoProduto'], $produto['nome'], 
+        $stmt->bind_param("isidss", $produto['idTipoProduto'], $produto['nome'], 
                 $produto['quantDisponivel'], $produto['preco'], $produto['descricao'],$produto['incluso']);
         if($stmt->execute()===TRUE){
             $stmt->close();
@@ -77,6 +77,38 @@ class ProdutoDao {
       if($stmt->execute()===TRUE){
          $result = $stmt->get_result();
          $arrayProduto = $result->fetch_all(MYSQLI_ASSOC);
+         $stmt->close();
+         $con->close();
+         return $arrayProduto;
+      }else{
+         $erro = $stmt->errno.' - '.$stmt->error;
+         return $erro;
+      }
+   }
+   
+   public function getAllProdutoRead(){    
+      $con = ConexaoDao::getConexao();
+      $query = "SELECT * FROM produto";
+      $stmt = $con->prepare($query);
+      if($stmt->execute()===TRUE){
+         $result = $stmt->get_result();
+         $arrayProduto = $result->fetch_all(MYSQLI_ASSOC);
+         $stmt->close();
+         $con->close();
+         return $arrayProduto;
+      }else{
+         $erro = $stmt->errno.' - '.$stmt->error;
+         return $erro;
+      }
+   }
+   
+   public function getLastProduto(){     
+      $con = ConexaoDao::getConexao();
+      $query = "SELECT * FROM produto ORDER BY idProduto DESC LIMIT 1";
+      $stmt = $con->prepare($query);
+      if($stmt->execute()===TRUE){
+         $result = $stmt->get_result();
+         $arrayProduto = $result->fetch_assoc();
          $stmt->close();
          $con->close();
          return $arrayProduto;

@@ -48,7 +48,8 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
         
         // tenta mover o arquivo para o destino
         if ( @move_uploaded_file ( $arquivo_tmp, $destino ) ) {
-            echo 'Arquivo salvo com sucesso em : <strong>' . $destino . '</strong><br />';
+            echo "<script>alert('okk')</script>";
+            header("Location: uploadImage.php");
         }
         else
             echo 'Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita.<br />';
