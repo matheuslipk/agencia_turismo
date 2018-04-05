@@ -1,10 +1,15 @@
 <?php
 require_once './dao/ProdutoDao.php';
+require_once './dao/ArquivoProdutoDao.php';
 session_start();
 $_SESSION['quant_produtos'] = 4;
 
 $produtoDao = new ProdutoDao();
 $produtos = $produtoDao->getAllProduto($_SESSION['quant_produtos']);
+
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +63,17 @@ $produtos = $produtoDao->getAllProduto($_SESSION['quant_produtos']);
                     <?php foreach ($produtos as $produto) { ?>
                         <li class="grid__item">
                             <a class="grid__link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
-                                <img class="grid__img" src="img/photos/1.jpg" alt="Some image" />
+                                <?php 
+                                    $imagens = $produtoDao->getAllImagesById($produto["idProduto"]);
+                                    $imagem = "1";
+                                    
+                                    foreach($imagens as $img){
+                                        $imagem = $img["idArquivo"];    
+                                    }
+                                
+                                ?>
+                                
+                                <img class="grid__img" src="img/eventos/%20<?= $imagem ?>.jpg" alt="Some image" />
                                 <h3 class="grid__item-title"><?= $produto["nome"] ?></h3>
                             </a>
                             <a class="grid__link" href="#" data-toggle="modal" data-target="#exampleModalCenter">

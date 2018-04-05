@@ -24,15 +24,15 @@ $produtos = $produtoDao->getAllProdutoRead();
     </head>
     <body style="">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Administrador</a>
+            <a class="navbar-brand" hrefindex.php">Administrador</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="newEvento.php">Novo Evento <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="newEvento.php">Novo Evento <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="uploadImage.php">Nova Foto</a>
-                    <a class="nav-item nav-link" href="#">Gerenciar Eventos</a>
+                    <a class="nav-item nav-link active" href="#">Gerenciar Eventos</a>
                     <b><a class="nav-item nav-link" href="../index.html">Ir Para o Site</a></b>
                 </div>
             </div>
@@ -60,10 +60,10 @@ $produtos = $produtoDao->getAllProdutoRead();
                         </form>
                     </td>
                     <td>
-                        <form>
-                            <input type="hidden" name="id" value="<?= $produto['idProduto'] ?>">
-                            <button class="btn btn-info" >Editar</button>
-                        </form>
+                        
+                        <input type="hidden" name="id" value="<?= $produto['idProduto'] ?>">
+                        <a href="editarEvento.php?id=<?= $produto['idProduto'] ?>"><button class="btn btn-info" >Editar</button></a>
+                        
                     </td>
                 </tr>
                 

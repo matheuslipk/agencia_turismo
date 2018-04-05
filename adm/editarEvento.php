@@ -2,6 +2,17 @@
 
 require_once '../dao/ArquivoDao.php';
 require_once '../dao/TipoProdutoDao.php';
+require_once '../dao/ProdutoDao.php';
+
+if(!isset($_GET['id'])){
+    header("Location: /adm/crudEvento.php");
+}
+
+$id = $_GET['id'];
+
+$produtoDao = new ProdutoDao();
+$produto = $produtoDao->getProdutoById($id);
+
 
 $arquivoDao = new ArquivoDao();
 $arquivos = $arquivoDao->getAll();
@@ -37,6 +48,17 @@ $tiposProduto = $tipoProdutoDao->getTiposProduto();
         height: 200
       });
             });
+            
+            function validarNumero(num){
+                num = num.replace(',','.');
+                $("#preco").val(num);
+                if(!$.isNumeric(num)){
+                    $("#preco").val('');
+                    alert("Digite apenas números");
+                }
+                
+                
+            }
         </script>
         <link href="../css/bootstrap-select.css" type="text/css" rel="stylesheet"/>
         <title>Novo Evento</title>
@@ -51,38 +73,47 @@ $tiposProduto = $tipoProdutoDao->getTiposProduto();
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Novo Evento <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="newEvento.php">Novo Evento <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="uploadImage.php">Nova Foto</a>
-                    <a class="nav-item nav-link" href="crudEvento.php">Gerenciar Eventos</a>
+                    <a class="nav-item nav-link active" href="crudEvento.php">Gerenciar Eventos</a>
                     <b><a class="nav-item nav-link" href="../index.html">Ir Para o Site</a></b>
                 </div>
             </div>
         </nav>
     <center>
-        <form style="width: 80%;margin-top: 30px" class="px-4 py-3" method="post" action="salvaEvento.php">               
+        <h2>Editar Evento</h2>
+        <form style="width: 80%;margin-top: 30px" class="px-4 py-3" method="post" action="crudProduto/editarEvento.php">               
+            
             <div class="container-fluid">
                 <div class="row">
                     <div class="form-group col-lg-8">
+                        <input type="hidden" name="id" value="<?=  $id ?>">
                         <label for="exampleInputPassword1">Título:</label>
-                        <input type="text" class="form-control" required="" name="titulo" id="exampleInputPassword1" placeholder="ex: Canoa Quebrada">
+                        <input type="text" class="form-control" value="<?= $produto['nome'] ?>" required="" name="titulo" id="exampleInputPassword1" placeholder="ex: Canoa Quebrada">
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="exampleInputPassword1">Quanidade Disponível:</label>
-                        <input type="text" class="form-control" required="" name="quantidade" id="exampleInputPassword1" placeholder="ex: 43">
+                        <input type="text" class="form-control" required value="<?= $produto['quantDisponivel'] ?>" name="quantidade" id="exampleInputPassword1" placeholder="ex: 43">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="exampleInputPassword1">Preço:</label>
-                        <input type="text" class="form-control" required="" name="preco" id="exampleInputPassword1" placeholder="ex: 39.90" style="height: 50%">
+                        <input onkeyup="validarNumero(this.value)" class="form-control" required="" value="<?= number_format($produto['preco'], 2)  ?>" name="preco" id="preco" placeholder="ex: 39.90" style="height: 50%">
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="exampleFormControlSelect1">Tipo de Produto:</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="tipo" required="" style="height: 50%">
-                            <?php foreach ($tiposProduto as $tipo) { ?>
-                            <option value="<?= $tipo['idTipoProduro'] ?>"><?= $tipo['nome'] ?></option>
-                            <?php } ?>
+                        <select class="form-control" id="exampleFormControlSelect1" value="<?= $produto['idTipoProduto'] ?>" name="tipo" required="" style="height: 50%">
+                            <?php 
+                            foreach ($tiposProduto as $tipo) { 
+                                if($tipo['idTipoProduro']==$produto['idTipoProduto']){
+                                    echo "<option value='{$tipo['idTipoProduro']}' selected> {$tipo['nome']}</option>";
+                                }else{
+                                    echo "<option value='{$tipo['idTipoProduro']}'> {$tipo['nome']}</option>";
+                                }
+                            }
+                             ?>
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
@@ -103,7 +134,7 @@ $tiposProduto = $tipoProdutoDao->getTiposProduto();
                     <div class="row">
                         <h3>Descrição do Produto:</h3>
                         <div class="col-lg-12 nopadding">
-                            <textarea id="txtEditor" name="descricao"  ></textarea> 
+                            <textarea id="txtEditor" name="descricao" ><?=  $produto['descricao'] ?> </textarea> 
                         </div>
                     </div>
                 </div>
@@ -114,7 +145,7 @@ $tiposProduto = $tipoProdutoDao->getTiposProduto();
                     <div class="row">
                         <h3>Incluso No Produto:</h3>                                            
                         <div class="col-lg-12 nopadding">
-                            <textarea id="txtIncluso" name="incluso"></textarea> 
+                            <textarea id="txtIncluso" name="incluso"><?=  $produto['incluso'] ?></textarea> 
                         </div>
                     </div>
             </div>
