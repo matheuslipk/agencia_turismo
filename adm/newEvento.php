@@ -37,6 +37,29 @@ $tiposProduto = $tipoProdutoDao->getTiposProduto();
         height: 200
       });
             });
+            
+            function validarNumero(num) {
+                var caracter = num.charAt(num.length - 1);
+                
+                if (!$.isNumeric(caracter)) {
+                    
+                    if (caracter === ',') {
+                        num = num.replace(',', '.');
+                    }
+                    else if (caracter === '.') {
+                    }else {
+                        num = num.replace(caracter, '');
+                    }
+                }
+                num = num.replace(',', '.');
+                $("#preco").val(num);
+
+                if (!$.isNumeric(num)) {
+                    $("#preco").val('');
+                    alert("Digite apenas números");
+                }
+
+            }
         </script>
         <link href="../css/bootstrap-select.css" type="text/css" rel="stylesheet"/>
         <title>Novo Evento</title>
@@ -75,11 +98,11 @@ $tiposProduto = $tipoProdutoDao->getTiposProduto();
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="exampleInputPassword1">Preço:</label>
-                        <input type="text" class="form-control" required="" name="preco" id="exampleInputPassword1" placeholder="ex: 39.90" style="height: 50%">
+                        <input type="text" onkeyup="validarNumero(this.value)" id="preco" class="form-control" required="" name="preco" id="exampleInputPassword1" placeholder="ex: 39.90" style="height: 50%">
                     </div>
                     <div class="form-group col-lg-4">
-                        <label for="exampleFormControlSelect1">Tipo de Produto:</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="tipo" required="" style="height: 50%">
+                        <label for="preco">Tipo de Produto:</label>
+                        <select class="form-control" id="tipo" name="tipo" required="" style="height: 50%">
                             <?php foreach ($tiposProduto as $tipo) { ?>
                             <option value="<?= $tipo['idTipoProduro'] ?>"><?= $tipo['nome'] ?></option>
                             <?php } ?>
